@@ -1,0 +1,9 @@
+# Ignore sensitive configuration files
+src/main/resources/application.properties
+
+# Ignore IDE-specific files
+.idea/
+.vscode/
+
+# Ignore build directories
+target/
