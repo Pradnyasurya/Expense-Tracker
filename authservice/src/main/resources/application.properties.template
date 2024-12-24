@@ -11,3 +11,10 @@ server.port=9898
 spring.cloud.config.enabled=false
 logging.level.org.springframework.security=DEBUG
 logging.level.your.package.name=DEBUG
+
+
+spring.kafka.producer.bootstrap-servers= localhost:9092
+spring.kafka.producer.key-serializer= org.apache.kafka.common.serialization.StringSerializer
+spring.kafka.producer.value-serializer= com.surya.authservice.serializer.UserInfoSerializer
+spring.kafka.topic-json.name=user_service
+spring.kafka.producer.properties.spring.json.type.mapping=auth:authservice.model.UserInfoDto
