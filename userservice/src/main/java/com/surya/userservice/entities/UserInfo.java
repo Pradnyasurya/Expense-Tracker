@@ -1,24 +1,32 @@
 package com.surya.userservice.entities;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.databind.PropertyNamingStrategies;
-import com.fasterxml.jackson.databind.annotation.JsonNaming;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
 import lombok.Setter;
 
-@Getter
-@Setter
+@Entity
 @AllArgsConstructor
 @NoArgsConstructor
-@JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
-@JsonIgnoreProperties(ignoreUnknown = true)
-public class UserInfoDto
+@Getter
+@Setter
+@Builder
+@Table(name = "users")
+public class UserInfo
 {
 
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
+
+    @Id
     @JsonProperty("user_id")
     @NonNull
     private String userId;
@@ -41,15 +49,5 @@ public class UserInfoDto
 
     @JsonProperty("profile_pic")
     private String profilePic;
-
-    public UserInfo transformToUserInfo() {
-        return UserInfo.builder()
-                .firstName(firstName)
-                .lastName(lastName)
-                .userId(userId)
-                .email(email)
-                .profilePic(profilePic)
-                .phoneNumber(phoneNumber).build();
-    }
 
 }

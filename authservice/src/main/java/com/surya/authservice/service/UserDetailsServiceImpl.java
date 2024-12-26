@@ -1,6 +1,7 @@
 package com.surya.authservice.service;
 
 import com.surya.authservice.entities.UserInfo;
+import com.surya.authservice.eventProducer.UserInfoEvent;
 import com.surya.authservice.eventProducer.UserInfoProducer;
 import com.surya.authservice.model.UserInfoDto;
 import com.surya.authservice.repository.UserRepository;
@@ -67,7 +68,17 @@ public class UserDetailsServiceImpl implements UserDetailsService
         String userId = UUID.randomUUID().toString();
         userRepository.save(new UserInfo(userId, userInfoDto.getUsername(), userInfoDto.getPassword(), new HashSet<>()));
         // pushEventToQueue
-        userInfoProducer.sendEventToKafka(userInfoDto);
+        userInfoProducer.sendEventToKafka(userInfoEventToPublish(userInfoDto, userId));
         return true;
+    }
+
+    private UserInfoEvent userInfoEventToPublish(UserInfoDto userInfoDto, String userId){
+        return UserInfoEvent.builder()
+                .userId(userId)
+                .firstName(userInfoDto.getUsername())
+                .lastName(userInfoDto.getLastName())
+                .email(userInfoDto.getEmail())
+                .phoneNumber(userInfoDto.getPhoneNumber()).build();
+
     }
 }
