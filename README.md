@@ -6,21 +6,21 @@ The Expense Tracker is a user-friendly application designed to help you manage y
 
 **Proposed Features**
 
-Secure Authentication
-Expense Management
+Secure Authentication,
+Expense Management,
 Insights and Reports
 
 **Tech Stack**
 
 Backend
 
-Java Spring Boot
-MySQL
+Java Spring Boot,
+MySQL,
 Kafka
 
 Frontend
 React
 
 Tools
-Docker
+Docker,
 Gradle
