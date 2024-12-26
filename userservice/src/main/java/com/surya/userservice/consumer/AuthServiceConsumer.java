@@ -3,6 +3,7 @@ package com.surya.userservice.consumer;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.surya.userservice.entities.UserInfoDto;
 import com.surya.userservice.repository.UserRepository;
+import com.surya.userservice.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.annotation.KafkaListener;
@@ -14,7 +15,7 @@ public class AuthServiceConsumer
 {
 
     @Autowired
-    private UserRepository userRepository;
+    private UserService userService;
 
     @Autowired
     private ObjectMapper objectMapper;
@@ -23,8 +24,7 @@ public class AuthServiceConsumer
     public void listen(UserInfoDto eventData) {
         try{
             //TODO: Make it transactional, to handle idempotency and validate email, phoneNumber etc
-//            userService.createOrUpdateUser(eventData);
-            System.out.println("AuthServiceConsumer: Consumed event: " + eventData);
+            userService.createOrUpdateUser(eventData);
         }catch(Exception ex){
             ex.printStackTrace();
             System.out.println("AuthServiceConsumer: Exception is thrown while consuming kafka event");
