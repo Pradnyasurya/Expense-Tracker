@@ -12,15 +12,14 @@ Insights and Reports
 
 **Tech Stack**
 
-Backend
-
+Backend:
 Java Spring Boot,
 MySQL,
 Kafka
 
-Frontend
+Frontend:
 React
 
-Tools
+Tools:
 Docker,
 Gradle
