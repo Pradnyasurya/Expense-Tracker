@@ -1,11 +1,7 @@
 package com.surya.userservice.entities;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -23,10 +19,11 @@ import lombok.Setter;
 public class UserInfo
 {
 
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO) // Mark this as the primary key
     private Long id;
 
-    @Id
+    @Column(name = "user_id", unique = true, nullable = false)
     @JsonProperty("user_id")
     @NonNull
     private String userId;
