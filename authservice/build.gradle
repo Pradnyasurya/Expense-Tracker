@@ -23,17 +23,12 @@ repositories {
 	mavenCentral()
 }
 
-ext {
-	set('springCloudVersion', "2024.0.0")
-}
-
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-actuator'
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	implementation 'org.springframework.boot:spring-boot-starter-oauth2-resource-server'
 	implementation 'org.springframework.boot:spring-boot-starter-security'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
-	implementation 'org.springframework.cloud:spring-cloud-starter-config'
 	implementation 'org.modelmapper:modelmapper:3.2.0'
 	implementation 'org.springframework.kafka:spring-kafka'
 	compileOnly 'org.projectlombok:lombok'
@@ -48,12 +43,6 @@ dependencies {
 	testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: '5.11.4'
 
 
-}
-
-dependencyManagement {
-	imports {
-		mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
-	}
 }
 
 tasks.named('test') {

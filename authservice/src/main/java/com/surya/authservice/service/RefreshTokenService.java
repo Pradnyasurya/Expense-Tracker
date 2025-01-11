@@ -14,20 +14,18 @@ import java.util.UUID;
 @Service
 public class RefreshTokenService {
 
-    private final RefreshTokenRepository refreshTokenRepository;
-    private final UserRepository userRepository;
-    
-    public RefreshTokenService(RefreshTokenRepository refreshTokenRepository, UserRepository userRepository) {
-        this.refreshTokenRepository = refreshTokenRepository;
-        this.userRepository = userRepository;
-    }
+    @Autowired
+    RefreshTokenRepository refreshTokenRepository;
+
+    @Autowired
+    UserRepository userRepository;
 
     public RefreshToken createRefreshToken(String username){
         UserInfo userInfoExtracted = userRepository.findByUsername(username);
         RefreshToken refreshToken = RefreshToken.builder()
                     .userInfo(userInfoExtracted)
                     .token(UUID.randomUUID().toString())
-                    .expiryDate(Instant.now().plusMillis(600000))
+                    .expiryDate(Instant.now().plusMillis(6000000))
                     .build();
         return refreshTokenRepository.save(refreshToken);
     }

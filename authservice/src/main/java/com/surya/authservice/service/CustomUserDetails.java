@@ -14,8 +14,8 @@ public class CustomUserDetails extends UserInfo
         implements UserDetails
 {
 
-    private final String username;
-    private final String password;
+    private String username;
+    private String password;
     Collection<? extends GrantedAuthority> authorities;
 
     public CustomUserDetails(UserInfo byUsername) {

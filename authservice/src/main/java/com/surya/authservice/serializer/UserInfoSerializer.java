@@ -1,4 +1,4 @@
-package com.surya.authservice.serializer;
+package authservice.serializer;
 
 import com.surya.authservice.eventProducer.UserInfoEvent;
 import com.surya.authservice.model.UserInfoDto;
