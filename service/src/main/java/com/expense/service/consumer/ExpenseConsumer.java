@@ -11,12 +11,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class ExpenseConsumer
 {
-
-    private ExpenseService expenseService;
-
-    ExpenseConsumer(ExpenseService expenseService){
-        this.expenseService = expenseService;
-    }
+    private final ExpenseService expenseService;
 
     @KafkaListener(topics = "${spring.kafka.topic-json.name}", groupId = "${spring.kafka.consumer.group-id}")
     public void listen(ExpenseDto eventData) {

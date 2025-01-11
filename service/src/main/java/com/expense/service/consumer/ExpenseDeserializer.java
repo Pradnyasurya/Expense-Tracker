@@ -9,6 +9,11 @@ import java.util.Map;
 public class ExpenseDeserializer implements Deserializer<ExpenseDto>
 {
 
+    @Override public void close() {
+    }
+    @Override public void configure(Map<String, ?> arg0, boolean arg1) {
+    }
+
     @Override
     public ExpenseDto deserialize(String arg0, byte[] arg1) {
         ObjectMapper mapper = new ObjectMapper();

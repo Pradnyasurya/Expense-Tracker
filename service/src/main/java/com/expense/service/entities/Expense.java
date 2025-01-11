@@ -16,6 +16,7 @@ import lombok.Setter;
 
 import java.math.BigDecimal;
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Entity
@@ -50,12 +51,23 @@ public class Expense
     @JsonProperty(value = "created_at")
     private Timestamp createdAt;
 
+    @JsonProperty(value = "updated_at")
+    private Timestamp updatedAt;
+
     @PrePersist
-    @PreUpdate
-    private void generateExternalId() {
+    private void onPrePersist() {
         if (this.externalId == null) {
             this.externalId = UUID.randomUUID().toString();
         }
+        if (this.createdAt == null) {
+            this.createdAt = Timestamp.valueOf(LocalDateTime.now());
+        }
+        this.updatedAt = Timestamp.valueOf(LocalDateTime.now());
+    }
+
+    @PreUpdate
+    private void onPreUpdate() {
+        this.updatedAt = Timestamp.valueOf(LocalDateTime.now());
     }
 
 }
