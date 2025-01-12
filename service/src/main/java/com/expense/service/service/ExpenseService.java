@@ -29,7 +29,8 @@ public class ExpenseService
     public boolean createExpense(ExpenseDto expenseDto){
         setCurrency(expenseDto);
         try{
-            expenseRepository.save(objectMapper.convertValue(expenseDto, Expense.class));
+            Expense expense = mapToExpense(expenseDto);
+            expenseRepository.save(expense);
             return true;
         }catch(Exception ex){
             return false;
@@ -59,6 +60,17 @@ public class ExpenseService
         if(Objects.isNull(expenseDto.getCurrency())){
             expenseDto.setCurrency("inr");
         }
+    }
+
+    public Expense mapToExpense(ExpenseDto expenseDto) {
+        Expense expense = new Expense();
+        expense.setExternalId(expenseDto.getExternalId());
+        expense.setAmount(expenseDto.getAmount());
+        expense.setUserId(expenseDto.getUserId());
+        expense.setMerchant(expenseDto.getMerchant());
+        expense.setCurrency(expenseDto.getCurrency());
+        expense.setCreatedAt(expenseDto.getCreatedAt());
+        return expense;
     }
 
 
