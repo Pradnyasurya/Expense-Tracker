@@ -47,7 +47,7 @@ public class ExpenseDto
     public ExpenseDto(String json) {
         try {
             ObjectMapper mapper = new ObjectMapper();
-            mapper.setPropertyNamingStrategy(PropertyNamingStrategy.SNAKE_CASE);
+            mapper.setPropertyNamingStrategy(PropertyNamingStrategies.SNAKE_CASE);
             ExpenseDto expense = mapper.readValue(json, ExpenseDto.class);
             this.externalId = expense.externalId;
             this.amount = expense.amount;
